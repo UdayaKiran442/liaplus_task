@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 
 import db from "./repository/db";
 
+import userRouter from "./routes/user.routes";
+
 dotenv.config();
 
 db.on("error", console.error.bind(console, "Error in connecting database"));
@@ -11,6 +13,8 @@ db.once("open", () => console.log("Connected to database"));
 const app = express();
 
 app.use(express.json());
+
+app.use("/user", userRouter)
 
 app.get("/health-check", (req: Request, res: Response) => {
   res.send(`Server is running on port ${process.env.PORT || 5000}`);
