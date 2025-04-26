@@ -30,3 +30,15 @@ export async function authMiddleware(
     return;
   }
 }
+
+export async function adminMiddleware(
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  if (!req.user || req.user.role !== "admin") {
+    res.status(401).json({ message: "Unauthorized" });
+    return;
+  }
+  next();
+}

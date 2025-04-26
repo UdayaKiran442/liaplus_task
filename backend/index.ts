@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import db from "./repository/db";
 
 import userRouter from "./routes/user.routes";
+import blogRouter from "./routes/blog.routes";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/user", userRouter)
+app.use("/blogs", blogRouter)
 
 app.get("/health-check", (req: Request, res: Response) => {
   res.send(`Server is running on port ${process.env.PORT || 5000}`);
