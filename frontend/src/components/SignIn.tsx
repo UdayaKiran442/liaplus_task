@@ -16,10 +16,14 @@ const SignIn = () => {
         </p>
         <form action="" className="w-full">
           <div className="mb-4">
-            <Input type="email" placeholder="Enter your email" />
+            <Input type="email" name="email" placeholder="Enter your email" />
           </div>
           <div className="mb-4">
-            <Input type="password" placeholder="Enter your password" />
+            <Input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+            />
           </div>
           <Button>Sign In</Button>
         </form>

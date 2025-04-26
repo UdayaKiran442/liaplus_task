@@ -1,10 +1,29 @@
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 import Input from "./ui/Input";
 import Button from "./ui/Button";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [signUpState, setSignUpState] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const onChangeSignUpValues = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setSignUpState({
+      ...signUpState,
+      [name]: value,
+    });
+  };
+
+  const handleSignUp = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(signUpState);
+  };
   return (
     <div className="flex min-h-screen justify-center items-center bg-gray-100">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md flex flex-col items-center">
@@ -14,15 +33,33 @@ const SignUp = () => {
         <p className="text-gray-500 text-sm mb-6 text-center">
           Create your account to get started
         </p>
-        <form action="" className="w-full">
+        <form action="" className="w-full" onSubmit={handleSignUp}>
           <div className="mb-4">
-            <Input type="text" placeholder="Enter your name" />
+            <Input
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              onChange={onChangeSignUpValues}
+              value={signUpState.name}
+            />
           </div>
           <div className="mb-4">
-            <Input type="email" placeholder="Enter your email" />
+            <Input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              onChange={onChangeSignUpValues}
+              value={signUpState.email}
+            />
           </div>
           <div className="mb-4">
-            <Input type="password" placeholder="Enter your password" />
+            <Input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              onChange={onChangeSignUpValues}
+              value={signUpState.password}
+            />
           </div>
           <Button>Sign Up</Button>
         </form>
