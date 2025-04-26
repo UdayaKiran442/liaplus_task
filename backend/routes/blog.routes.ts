@@ -34,7 +34,7 @@ blogRouter.post(
   async (req, res) => {
     try {
       const payload = req.body as ICreateBlogSchema;
-      payload.authorId = (req as AuthRequest).user.userId;
+      payload.authorId = (req as AuthRequest).user._id.toString();
       const result = await addBlog(payload);
       res.json({ message: "Blog added successfully", result });
     } catch (error: any) {

@@ -22,8 +22,7 @@ export interface ISignInAPIResponse {
 
 export interface IBlog {
   _id: string;
-  blogId: string;
-  authorId: string;
+  authorId: IUser;
   title: string;
   content: string;
   createdAt: Date;
@@ -32,7 +31,6 @@ export interface IBlog {
 
 export interface IUser {
   _id: string;
-  userId: string;
   name: string;
   email: string;
   role: string;

@@ -9,7 +9,6 @@ import { User } from "../schema";
 export async function addUserToDB(payload: IRegisterUserSchema) {
   try {
     const insertPayload = {
-      userId: new mongoose.Types.ObjectId(),
       name: payload.name,
       email: payload.email,
       hashedPassword: await hashPassword(payload.password),
@@ -28,15 +27,9 @@ export async function getUserByEmailInDB(email: string) {
   }
 }
 
-  /**
-   * Fetches a user by their ID from the database.
-   * @param {string} userId The ID of the user to fetch.
-   * @returns {Promise<import("mongoose").Document & User>} The fetched user document.
-   * @throws An error if the user is not found.
-   */
 export async function getUserByIdInDB(userId: string) {
   try {
-    return await User.findOne({ userId });
+    return await User.findById(userId);
   } catch (error) {
     throw error;
   }

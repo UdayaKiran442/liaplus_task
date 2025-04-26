@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
-  userId: { type: mongoose.Types.ObjectId, required: true },
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   hashedPassword: { type: String, required: true },
@@ -13,7 +12,6 @@ const UserSchema = new mongoose.Schema({
 export const User = mongoose.model("User", UserSchema);
 
 const BlogSchema = new mongoose.Schema({
-  blogId: { type: mongoose.Types.ObjectId, required: true },
   title: { type: String, required: true },
   content: { type: String, required: true },
   authorId: { type: mongoose.Types.ObjectId, required: true, ref: "User" },

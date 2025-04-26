@@ -46,7 +46,7 @@ userRouter.post("/login", async (req, res) => {
   try {
     const payload = req.body as ILoginUserSchema;
     const user = await loginUser(payload);
-    const token = generateJWTToken(user.userId.toString());
+    const token = generateJWTToken(user._id.toString());
     res.json({ message: "User logged in successfully", user, token });
   } catch (error: any) {
     res

@@ -21,7 +21,7 @@ export async function authMiddleware(
   const token = authHeader.split(" ")[1];
   try {
     const decoded = verifyJWTToken(token);
-    const userId = decoded.userId;
+    const userId = decoded._id;
     const user = await getUserByIdInDB(userId);
     req.user = user;
     next();
