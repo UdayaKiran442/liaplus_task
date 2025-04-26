@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import Input from "./ui/Input";
 import Button from "./ui/Button";
+import { signInAPI, signUpAPI } from "../api/auth";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -20,9 +21,28 @@ const SignUp = () => {
     });
   };
 
-  const handleSignUp = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(signUpState);
+  const handleSignUp = async (e: React.FormEvent) => {
+    try {
+      e.preventDefault();
+      const result = await signUpAPI(signUpState);
+      if (result.message === "User registered successfully") {
+        const signInResult = await signInAPI({
+          email: signUpState.email,
+          password: signUpState.password,
+        });
+        if (signInResult.message === "User logged in successfully") {
+          localStorage.setItem("token", signInResult.token);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSignUpState({
+        name: "",
+        email: "",
+        password: "",
+      });
+    }
   };
   return (
     <div className="flex min-h-screen justify-center items-center bg-gray-100">
