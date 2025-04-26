@@ -21,8 +21,10 @@ userRouter.post("/register", async (req, res) => {
     const payload = req.body as IRegisterUserSchema;
     const result = await registerUser(payload);
     res.json({ message: "User registered successfully", result });
-  } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error });
+  } catch (error: any) {
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
 });
 userRouter.post("/login", (req, res) => {});
