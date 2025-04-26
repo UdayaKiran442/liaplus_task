@@ -25,3 +25,16 @@ export const signInAPI = async (data: any) => {
     throw error;
   }
 };
+
+export const getUserProfileAPI = async () => {
+  try {
+    const response = await apiInstance.post("/user/profile", {}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
