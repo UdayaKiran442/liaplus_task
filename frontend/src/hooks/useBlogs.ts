@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { getBlogsAPI } from "../api/blogs";
+import { deleteBlogAPI, getBlogsAPI } from "../api/blogs";
 
 
 export const useBlogs = () => {
@@ -18,5 +18,17 @@ export const useBlogs = () => {
     }
   }, []);
 
-  return { loading, fetchBlogs };
+  const deleteBlogPost = useCallback(async (blogId: string) => {
+    try {
+      setLoading(true);
+      const deleteBlogAPIResponse = await deleteBlogAPI(blogId);
+      return deleteBlogAPIResponse;
+    } catch (error) {
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  return { loading, fetchBlogs, deleteBlogPost };
 };

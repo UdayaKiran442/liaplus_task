@@ -14,3 +14,16 @@ export async function getBlogsAPI() {
     throw error;
   }
 }
+
+export async function deleteBlogAPI(blogId: string) {
+  try {
+    const response = await apiInstance.post(`/blogs/delete`, { blogId }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}

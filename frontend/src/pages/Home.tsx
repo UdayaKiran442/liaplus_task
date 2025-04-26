@@ -1,5 +1,6 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Trash2 } from "lucide-react";
 
 import Button from "../components/ui/Button";
 
@@ -10,7 +11,9 @@ import { IBlog } from "../types/types";
 const Home = () => {
   const [allBlogs, setAllBlogs] = useState<IBlog[]>([]);
 
-  const { fetchBlogs } = useBlogs();
+  const { user } = useSelector((state: any) => state.user);
+
+  const { fetchBlogs, deleteBlogPost } = useBlogs();
 
   const getAllBlogs = async () => {
     try {
@@ -21,9 +24,18 @@ const Home = () => {
     }
   };
 
+  const onDelete = async (blogId: string) => {
+    try {
+      await deleteBlogPost(blogId);
+      await getAllBlogs();
+    } catch (error) {
+      throw error;
+    }
+  };
+
   useEffect(() => {
     getAllBlogs();
-  }, [fetchBlogs]);
+  }, [fetchBlogs, deleteBlogPost, user]);
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-4">
@@ -37,9 +49,17 @@ const Home = () => {
             className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-200 overflow-hidden flex flex-col"
           >
             <div className="flex-1 flex flex-col p-6">
-              <h2 className="text-2xl font-semibold mb-2 text-gray-900 line-clamp-2">
-                {blog.title}
-              </h2>
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-2xl font-semibold mb-2 text-gray-900 line-clamp-2">
+                  {blog.title}
+                </h2>
+                {user.role === "admin" && (
+                  <Trash2
+                    onClick={() => onDelete(blog._id)}
+                    className="text-red-500 hover:text-red-400 transition duration-200 cursor-pointer"
+                  />
+                )}
+              </div>
               <p className="text-gray-600 mb-4 flex-1 line-clamp-3">
                 {blog.content}
               </p>
