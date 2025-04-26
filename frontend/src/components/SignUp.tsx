@@ -4,7 +4,7 @@ import { useState } from "react";
 import Input from "./ui/Input";
 import Button from "./ui/Button";
 
-import { signInAPI, signUpAPI } from "../api/auth";
+import { useAuth } from "../hooks/useAuth";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -14,6 +14,8 @@ const SignUp = () => {
     password: "",
   });
 
+  const { loading, handleSignUp } = useAuth();
+
   const onChangeSignUpValues = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setSignUpState({
@@ -22,19 +24,11 @@ const SignUp = () => {
     });
   };
 
-  const handleSignUp = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     try {
       e.preventDefault();
-      const result = await signUpAPI(signUpState);
-      if (result.message === "User registered successfully") {
-        const signInResult = await signInAPI({
-          email: signUpState.email,
-          password: signUpState.password,
-        });
-        if (signInResult.message === "User logged in successfully") {
-          localStorage.setItem("token", signInResult.token);
-        }
-      }
+      await handleSignUp(signUpState);
+      navigate("/");
     } catch (error) {
       console.log(error);
     } finally {
@@ -54,7 +48,7 @@ const SignUp = () => {
         <p className="text-gray-500 text-sm mb-6 text-center">
           Create your account to get started
         </p>
-        <form action="" className="w-full" onSubmit={handleSignUp}>
+        <form action="" className="w-full" onSubmit={onSubmit}>
           <div className="mb-4">
             <Input
               type="text"
@@ -82,7 +76,7 @@ const SignUp = () => {
               value={signUpState.password}
             />
           </div>
-          <Button>Sign Up</Button>
+          <Button loading={loading}>Sign Up</Button>
         </form>
         <div className="text-center mt-2">
           <span className="text-gray-500 text-sm">

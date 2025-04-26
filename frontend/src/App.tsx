@@ -18,9 +18,14 @@ function App() {
   const setUserProfile = async () => {
     try {
       const getUserProfile = await getUserProfileAPI();
-      dispatch(setUser(getUserProfile.user));
+      if (
+        getUserProfile.message === "User profile fetched successfully" &&
+        getUserProfile.user
+      ) {
+        dispatch(setUser(getUserProfile.user));
+      }
     } catch (error) {
-      console.log(error);
+      dispatch(setUser(null));
     }
   };
 
