@@ -1,6 +1,6 @@
 const Button = ({ children }: { children: React.ReactNode }) => {
   return (
-    <button className="bg-black text-white p-2 rounded-md">
+    <button className="w-full py-2 text-lg font-semibold bg-black text-white rounded-lg shadow-md transition-all duration-200 mb-3">
       {children}
     </button>
   );

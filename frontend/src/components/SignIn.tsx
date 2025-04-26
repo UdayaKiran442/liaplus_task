@@ -3,38 +3,33 @@ import { useNavigate } from "react-router";
 import Input from "./ui/Input";
 import Button from "./ui/Button";
 
-const SignUp = () => {
+const SignIn = () => {
   const navigate = useNavigate();
   return (
     <div className="flex min-h-screen justify-center items-center bg-gray-100">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md flex flex-col items-center">
         <p className="text-3xl font-extrabold text-gray-800 mb-1 text-center">
-          Sign Up
+          Sign In
         </p>
         <p className="text-gray-500 text-sm mb-6 text-center">
-          Create your account to get started
+          Sign in to your account
         </p>
         <form action="" className="w-full">
-          <div className="mb-4">
-            <Input type="text" placeholder="Enter your name" />
-          </div>
           <div className="mb-4">
             <Input type="email" placeholder="Enter your email" />
           </div>
           <div className="mb-4">
             <Input type="password" placeholder="Enter your password" />
           </div>
-          <Button>Sign Up</Button>
+          <Button>Sign In</Button>
         </form>
         <div className="text-center mt-2">
-          <span className="text-gray-500 text-sm">
-            Already have an account?{" "}
-          </span>
+          <span className="text-gray-500 text-sm">Don't have an account? </span>
           <span
-            onClick={() => navigate("/sign-in")}
+            onClick={() => navigate("/")}
             className="text-blue-500 cursor-pointer hover:underline text-sm font-medium"
           >
-            Sign In
+            Sign Up
           </span>
         </div>
       </div>
@@ -42,4 +37,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
