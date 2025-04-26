@@ -1,7 +1,9 @@
 import express from "express";
 import { z } from "zod";
 
-import { registerUser } from "../controller/user.controller";
+import { loginUser, registerUser } from "../controller/user.controller";
+
+import { generateJWTToken } from "../utils/jwt.utils";
 
 const userRouter = express.Router();
 
@@ -27,6 +29,28 @@ userRouter.post("/register", async (req, res) => {
       .json({ message: "Internal Server Error", error: error.message });
   }
 });
-userRouter.post("/login", (req, res) => {});
+
+const LoginUserSchema = z.object({
+  email: z.string().email().describe("Email must be a valid email address"),
+  password: z
+    .string()
+    .min(6)
+    .describe("Password must be at least 6 characters long"),
+});
+
+export type ILoginUserSchema = z.infer<typeof LoginUserSchema>;
+
+userRouter.post("/login", async (req, res) => {
+  try {
+    const payload = req.body as ILoginUserSchema;
+    const user = await loginUser(payload);
+    const token = generateJWTToken(user.userId.toString());
+    res.json({ message: "User logged in successfully", user, token });
+  } catch (error: any) {
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
+});
 
 export default userRouter;

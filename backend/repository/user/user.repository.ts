@@ -20,7 +20,7 @@ export async function addUserToDB(payload: IRegisterUserSchema) {
   }
 }
 
-export async function getUserByEmail(email: string) {
+export async function getUserByEmailInDB(email: string) {
   try {
     return await User.findOne({ email });
   } catch (error) {
