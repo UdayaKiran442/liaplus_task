@@ -5,6 +5,8 @@ import { loginUser, registerUser } from "../controller/user.controller";
 
 import { generateJWTToken } from "../utils/jwt.utils";
 
+import { authMiddleware, AuthRequest } from "../middleware/auth.middleware";
+
 const userRouter = express.Router();
 
 const RegisterUserSchema = z.object({
@@ -46,6 +48,19 @@ userRouter.post("/login", async (req, res) => {
     const user = await loginUser(payload);
     const token = generateJWTToken(user.userId.toString());
     res.json({ message: "User logged in successfully", user, token });
+  } catch (error: any) {
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
+});
+
+userRouter.post("/profile", authMiddleware, async (req, res) => {
+  try {
+    res.json({
+      message: "User profile fetched successfully",
+      user: (req as AuthRequest).user,
+    });
   } catch (error: any) {
     res
       .status(500)

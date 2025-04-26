@@ -27,3 +27,17 @@ export async function getUserByEmailInDB(email: string) {
     throw error;
   }
 }
+
+  /**
+   * Fetches a user by their ID from the database.
+   * @param {string} userId The ID of the user to fetch.
+   * @returns {Promise<import("mongoose").Document & User>} The fetched user document.
+   * @throws An error if the user is not found.
+   */
+export async function getUserByIdInDB(userId: string) {
+  try {
+    return await User.findOne({ userId });
+  } catch (error) {
+    throw error;
+  }
+}
