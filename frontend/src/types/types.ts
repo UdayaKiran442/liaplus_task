@@ -20,6 +20,16 @@ export interface ISignInAPIResponse {
   token: string;
 }
 
+export interface IBlog {
+  _id: string;
+  blogId: string;
+  authorId: string;
+  title: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface IUser {
   _id: string;
   userId: string;
@@ -29,4 +39,9 @@ export interface IUser {
   createdAt: Date;
   updatedAt: Date;
   __v: number;
+}
+
+export interface IGetAllBlogsAPIResponse {
+  message: string;
+  result: IBlog[];
 }
