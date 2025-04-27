@@ -5,6 +5,7 @@ import { useBlogs } from "../hooks/useBlogs";
 
 import Button from "../components/ui/Button";
 import H2 from "../components/ui/Typography";
+import Input from "../components/ui/Input";
 
 const AddBlog = () => {
   const [newBlog, setNewBlog] = useState({
@@ -47,8 +48,7 @@ const AddBlog = () => {
       <H2>Add Blog</H2>
       <form onSubmit={onSubmit}>
         <div className="flex flex-col p-4 gap-4 mt-6">
-          <input
-            className="w-full p-2 border border-gray-300 rounded-md"
+          <Input
             type="text"
             placeholder="Title"
             value={newBlog.title}

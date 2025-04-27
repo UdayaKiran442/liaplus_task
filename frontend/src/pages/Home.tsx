@@ -4,6 +4,7 @@ import { Trash2 } from "lucide-react";
 import { useNavigate } from "react-router";
 
 import Button from "../components/ui/Button";
+import H2 from "../components/ui/Typography";
 
 import { useBlogs } from "../hooks/useBlogs";
 
@@ -43,7 +44,7 @@ const Home = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch(logoutUser());
-    navigate("/");
+    navigate("/sign-in");
   };
 
   useEffect(() => {
@@ -53,9 +54,7 @@ const Home = () => {
   return (
     <div className="max-w-5xl mx-auto py-10 px-4">
       <div className="flex items-center mb-10">
-        <h1 className="text-4xl font-extrabold text-center text-gray-800 tracking-tight">
-          Latest Blogs
-        </h1>
+        <H2>Latest Blogs</H2>
         <div className="flex gap-2 ml-auto">
           {user.role === "admin" && (
             <button

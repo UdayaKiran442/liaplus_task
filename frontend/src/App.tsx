@@ -39,12 +39,12 @@ function App() {
     if (token) {
       setUserProfile();
     } else {
-      setLoading(false); // No token, no need to fetch profile
+      setLoading(false);
     }
   }, [token]);
 
   if (loading) {
-    return <div>Loading...</div>; // or a spinner
+    return <div>Loading...</div>;
   }
 
   return (
