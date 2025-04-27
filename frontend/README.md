@@ -1,54 +1,81 @@
-# React + TypeScript + Vite
+# Getting started with the project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Prerequisites
 
-Currently, two official plugins are available:
+- Node.js
+- npm or bun or yarn
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Installation
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Clone repository
+```sh
+git clone https://github.com/UdayaKiran442/liaplus_task.git
+cd <project directory>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+# Steps to run frontend server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+- Open terminal in frontend directory
+```sh
+cd frontend
 ```
+- To install dependencies:
+```sh
+bun install
+```
+- To run server:
+```sh
+bun run dev
+```
+
+- Server will run on port 5173
+
+# Folder Structure
+
+```
+src/
+├── components/
+├── pages/
+├── hooks/
+├── types/
+├── README.md
+├── package.json
+├── tsconfig.json
+└── .gitignore
+```
+
+## Components
+- Contains reusable UI components
+
+## Pages
+- Contains route components
+
+## Hooks
+- Contains custom hooks for handling api calls
+
+## Types
+- Contains interfaces for api payload and responses
+
+## README.md
+- Contains project documentation
+
+## package.json
+- Contains package configuration
+
+## tsconfig.json
+- Contains TypeScript configuration
+
+## .gitignore
+- Contains the files and directories that should not be committed to github
+
+
+# Architecture and Flow
+
+1. Frontend: ReactJS + TypeScript + Vite
+    - Login and signup forms
+    - Blog post listing for all users
+    - Admin dashboard for blog management
+
+
+
+
