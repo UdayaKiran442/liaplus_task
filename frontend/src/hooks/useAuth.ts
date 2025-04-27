@@ -32,8 +32,28 @@ export const useAuth = () => {
     }
   }, []);
 
+  const handleSignIn = useCallback(
+    async (payload: { email: string; password: string }) => {
+      try {
+        setLoading(true);
+
+        const signInAPIResponse = await signInAPI(payload);
+        if (signInAPIResponse.message === "User logged in successfully") {
+          localStorage.setItem("token", signInAPIResponse.token);
+          dispatch(setUser(signInAPIResponse.user));
+        }
+      } catch (error) {
+        throw error;
+      } finally {
+        setLoading(false);
+      }
+    },
+    []
+  );
+
   return {
     loading,
     handleSignUp,
+    handleSignIn,
   };
 };
