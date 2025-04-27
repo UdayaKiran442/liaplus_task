@@ -2,15 +2,14 @@ import { useNavigate } from "react-router";
 
 import Input from "./ui/Input";
 import Button from "./ui/Button";
+import H2 from "./ui/Typography";
 
 const SignIn = () => {
   const navigate = useNavigate();
   return (
     <div className="flex min-h-screen justify-center items-center bg-gray-100">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md flex flex-col items-center">
-        <p className="text-3xl font-extrabold text-gray-800 mb-1 text-center">
-          Sign In
-        </p>
+        <H2>Sign In</H2>
         <p className="text-gray-500 text-sm mb-6 text-center">
           Sign in to your account
         </p>

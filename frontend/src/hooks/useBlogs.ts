@@ -1,7 +1,8 @@
 import { useCallback, useState } from "react";
 
-import { deleteBlogAPI, getBlogsAPI } from "../api/blogs";
+import { deleteBlogAPI, getBlogsAPI, addBlogAPI } from "../api/blogs";
 
+import { IAddBlogAPIPayload } from "../types/types";
 
 export const useBlogs = () => {
   const [loading, setLoading] = useState(false);
@@ -30,5 +31,16 @@ export const useBlogs = () => {
     }
   }, []);
 
-  return { loading, fetchBlogs, deleteBlogPost };
+  const addBlogPost = useCallback(async (blog: IAddBlogAPIPayload) => {
+    try {
+      setLoading(true);
+      return await addBlogAPI(blog);
+    } catch (error) {
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  return { loading, fetchBlogs, deleteBlogPost, addBlogPost };
 };

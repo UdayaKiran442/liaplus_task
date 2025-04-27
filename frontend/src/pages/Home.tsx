@@ -8,10 +8,14 @@ import { useBlogs } from "../hooks/useBlogs";
 
 import { IBlog } from "../types/types";
 
+import { useNavigate } from "react-router";
+
 const Home = () => {
   const [allBlogs, setAllBlogs] = useState<IBlog[]>([]);
 
   const { user } = useSelector((state: any) => state.user);
+
+  const navigate = useNavigate(); 
 
   const { fetchBlogs, deleteBlogPost } = useBlogs();
 
@@ -39,9 +43,16 @@ const Home = () => {
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-4">
-      <h1 className="text-4xl font-extrabold mb-10 text-center text-gray-800 tracking-tight">
-        Latest Blogs
-      </h1>
+      <div className="flex items-center justify-between mb-10">
+        <h1 className="text-4xl font-extrabold text-center text-gray-800 tracking-tight">
+          Latest Blogs
+        </h1>
+        {user.role === "admin" && (
+          <button onClick={() => navigate("/add-blog")} className="bg-black text-white py-2 px-4 rounded-md hover:bg-black/80">
+            Add Blog
+          </button>
+        )}
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {allBlogs.map((blog) => (
           <div

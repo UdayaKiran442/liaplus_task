@@ -1,6 +1,10 @@
 import apiInstance from ".";
 
-import { IGetAllBlogsAPIResponse } from "../types/types";
+import {
+  IAddBlogAPIPayload,
+  IAddBlogAPIResponse,
+  IGetAllBlogsAPIResponse,
+} from "../types/types";
 
 export async function getBlogsAPI() {
   try {
@@ -17,10 +21,29 @@ export async function getBlogsAPI() {
 
 export async function deleteBlogAPI(blogId: string) {
   try {
-    const response = await apiInstance.post(`/blogs/delete`, { blogId }, {
+    const response = await apiInstance.post(
+      `/blogs/delete`,
+      { blogId },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function addBlogAPI(
+  blog: IAddBlogAPIPayload
+): Promise<IAddBlogAPIResponse> {
+  try {
+    const response = await apiInstance.post("/blogs/create", blog, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
-      }
+      },
     });
     return response.data;
   } catch (error) {

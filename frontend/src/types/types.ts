@@ -43,3 +43,14 @@ export interface IGetAllBlogsAPIResponse {
   message: string;
   result: IBlog[];
 }
+
+export interface IAddBlogAPIPayload {
+  title: string;
+  content: string;
+}
+
+export interface IAddBlogAPIResponse {
+  message: string;
+  blog: IBlog;
+}
+  
