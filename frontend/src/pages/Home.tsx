@@ -15,7 +15,7 @@ const Home = () => {
 
   const { user } = useSelector((state: any) => state.user);
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const { fetchBlogs, deleteBlogPost } = useBlogs();
 
@@ -24,7 +24,7 @@ const Home = () => {
       const blogs = await fetchBlogs();
       setAllBlogs(blogs);
     } catch (error) {
-      throw error;
+      alert("Failed to fetch blogs! Try again later");
     }
   };
 
@@ -33,7 +33,7 @@ const Home = () => {
       await deleteBlogPost(blogId);
       await getAllBlogs();
     } catch (error) {
-      throw error;
+      alert("Failed to delete blog! Try again later");
     }
   };
 
@@ -48,7 +48,10 @@ const Home = () => {
           Latest Blogs
         </h1>
         {user.role === "admin" && (
-          <button onClick={() => navigate("/add-blog")} className="bg-black text-white py-2 px-4 rounded-md hover:bg-black/80">
+          <button
+            onClick={() => navigate("/add-blog")}
+            className="bg-black text-white py-2 px-4 rounded-md hover:bg-black/80"
+          >
             Add Blog
           </button>
         )}
